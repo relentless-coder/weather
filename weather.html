@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="assets/css/weather.css">
+    <title>Weather Clock</title>
+</head>
+
+<body ng-app="weatherClock">
+    <button id="create-alarm-button">Create Alarm</button>
+    <button id="close-alarm-button" class="hide">Close</button>
+    <div id="clock-buttons">
+        <button id="show-clock-button">Show Time</button>
+        <button id="hide-clock-button" class="hide">Hide Time</button>
+    </div>
+    <div id="clock" class="hide-time">
+        <div id="hour"></div>
+        <div id="minute"></div>
+        <div id="second"></div>
+    </div>
+    <div id="alarm" class="alarm hide" ng-controller="AlarmCtrl">
+        <select name="" id="select-hours">
+    <option value="">Hour</option>
+    <option ng-value={{hour}} ng-repeat="hour in hours track by $index">{{hour}}</option>
+  </select>
+        <select name="" id="select-minutes">
+    <option value="">Minute</option>
+    <option ng-value={{minute}} ng-repeat="minute in minutes track by $index">{{minute}}</option>
+  </select>
+        <button id="set-alarm">Set Alarm</button>
+    </div>
+    <div id="weather" ng-controller="GeoWeatherCtrl as geoWe">
+        <div id="display-weather">{{geoWe.strings[0]}} {{ geoWe.demandWeather.data.main.temp}} <sup>{{geoWe.strings[1]}}</sup>{{geoWe.strings[2]}} {{geoWe.strings[3]}} {{ geoWe.demandWeather.data.name }}</div>
+        <div id="search-weather">
+            <input type="text" ng-model="geoWe.city" name="city" placeholder="Enter a city" id="city" /> <button id="get-weather" ng-click=geoWe.demandWeatherFunction();geoWe.getStrings()>Weather</button>
+        </div>
+
+    </div>
+    <script src="assets/js/weather.js" charset="utf-8"></script>
+</body>
+
+</html>
